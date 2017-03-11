@@ -348,6 +348,11 @@ public class Solution {
     }
 }
 #+END_SRC
+
+- run by hand
+#+BEGIN_SRC source
+
+#+END_SRC
 ** 2/13 Class2 Recursion I & binary Search p10~p20
 *** Iterative反复的 way vs Recursive递归 way
 - Recursion
