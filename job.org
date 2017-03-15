@@ -1,0 +1,560 @@
+#+TITLE: 计算机基础与面试准备 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="~test.css" />
+
+* 算法
+** 2/6 Class1 Array & Sorting Algorithms
+*** Data structure: 是一种特别的方式, 电脑里组织数据的方式, 所以能够更高效的使用
+- Common data structure:
+  - 线性数据结构
+    - array 数组
+      - int array[10]
+    - stack 栈
+      - 一段封闭, 只能从屁股开始存取
+    - queue /q/ a list of data items 队列
+      - 两端都能操作, 有点跟stack像
+    - linked list 链表
+      - 和array有点像, 他们真的佛珠一样连在一起
+
+*** 打印array的元素
+- time complexity = O(n)
+- space complexity = O(n)
+- 线性增长是n
+- 花得时间是恒定的,OJ(1), 例如把array的size打印出来
+- 什么时候是n^2
+
+*** 复杂度
+- 时间复杂度
+- 空间复杂度: 运行这个算法需要多少内存O(n), 学术派 == 忽律
+- auxiliary备用的 空间复杂度: 面试默认, 算法峰值消耗的内存, 不包括输入
+#+BEGIN_SRC java
+int [] array = new int[10];
+for (int i = 0; i < array.length; i++){
+    System.out.println(array[i]);
+}
+#+END_SRC
+  - space complexity = O(1)
+- 额外需要O(n)空间复杂度的例子?
+  - 复制这个数组到另外一个数组
+- 总结
+  - 随着自变量增长, 复杂度线性增长的是O(n)
+  - 随着自变量增长, 复杂度恒定的是O(1)
+
+*** Selection Sort 选择排序
+- 把没排好序的元素里, 选择最细的, 放在没排好的最左边
+#+BEGIN_SRC java
+step1: find global min, {-3, -1, 4, 7}, min: -3, => -3, {-1, 4, 7}
+step2: find global min, -3, {-1, 4, 7}, min: -1, => -3, -1, {4,7}
+step3: find global min, -3, -1, {4,7}, min: 4, => -3, -1, 4, {7}
+step4: find global min done. 不找了, 做个优化 未排变已排
+#+END_SRC
+
+*** 讲解代码要点 / Selection Sort:
+- 先讲你的assumption假设, eg. 升序,还是降. For this question, I will assume that.......
+- 然后讲方法, 你点样去解决这个问题
+- 要写注释comments
+- 描述big-O 运行时间复杂度
+- 说一下任何额外使用的数据结构并且讲下点解, eg hash table
+- 提供问题的各个部分最优解 
+#+BEGIN_SRC java
+void SelectionSort(int a[], int n){
+    int global, temp;
+    // i是操作位置
+    for (int i = 0, i < n-1; i++){
+        global = i;
+        for (int j = i +1; j < n; j++){
+            if (a[j] < a[global]){
+                global = j;
+            }
+        }
+        // 交换最小值和目前的操作位置
+        temp = a[i];
+        a[i] = a[global];
+        a[global] = temp;  
+    }  
+}
+#+END_SRC
+- 时间复杂度
+  - 一个循环内嵌一个循环: i循环n-1次, j循环n-1次(1开始)
+  - i = 0; j = 1, 2, 3... => n-1次
+  - i = 1; j = 2, 3, 4... => n-2次
+  - i = n-3; j = n-2, n-1 => 2次
+  - i = n-2; j = n-1 => 1次
+  - 和 = 复杂度 = 等差数列 = 1+2+3+...+n-1 = (1+n-1)(n-1)/2 = n(n-1)/2 => n^2 => O(n^2)
+
+*** 面试变种题
+- given an array stored in Stack1, how to sort the numbers by using additional two stacks
+#+BEGIN_SRC java
+stack1 : 4 1 3 
+stack2 : 
+stack3 :
+
+// 自己建立个global_min, stack1最后的元素'3'复制到global_min
+global_min = 3
+stack1 : 4 1 3
+stack2 : 
+stack3 :
+
+//移动'3'到stack2, 比较global_min与stack1最后一个元素, 如果更小就更新global_min
+global_min = 3
+stack1 : 4 1 
+stack2 : 3
+stack3 :
+
+global_min = 1
+stack1 : 4  
+stack2 : 3 1
+stack3 :
+
+global_min = 1
+stack1 :   
+stack2 : 3 1 4
+stack3 : 1
+
+//移动stack2回stack1, 如果是global_min就忽略
+global_min = 
+stack1 : 4 3
+stack2 :
+stack3 : 1 
+
+global_min = 3 
+stack1 : 4
+stack2 : 3 
+stack3 : 1 
+
+global_min = 3 
+stack1 : 
+stack2 : 3 4 
+stack3 : 1 
+
+global_min =  
+stack1 : 4
+stack2 :  
+stack3 : 1 3
+
+// 最后一个直接移动就可以了
+global_min =  
+stack1 : 
+stack2 :  
+stack3 : 1 3 4
+#+END_SRC
+
+- 用两个stack, 而不是3个. stack2当做结果stack, 需要一个隐形的隔板
+#+BEGIN_SRC java
+stack1 : 4 1 3 
+stack2 : 
+
+min = 3
+stack1 : 4 1 3 
+stack2 :
+
+min = 3
+stack1 : 4 1  
+stack2 : 3
+
+min = 1
+stack1 :    
+stack2 : 3 1 4
+
+//不剪切复制和min相同的数回stack1, stack2留下了排好的东西, 隔板的原来
+min = 1
+stack1 : 4 3
+stack2 : 1
+
+min = 3
+stack1 : 4 3
+stack2 : 1
+
+min = 3
+stack1 :  
+stack2 : 1 3 4
+h
+min = 3
+stack1 : 4
+stack2 : 1 3
+
+min = 
+stack1 : 4
+stack2 : 1 3
+#+END_SRC
+
+*** Merge sort
+#+BEGIN_SRC java
+vector<int> mergesort (vector<int>& a, int left, int right) {
+    vector<int> solution;
+    if (left == right) {
+        solution.push_back(array[left]);
+        return solution;
+    }
+    int mid = left + (right - left) / 2;
+    vector<int> solu_left = mergesort(a, left, mid);
+    vector<int> solu_right = mergesort(a, mid + 1, right);
+
+    solution = combine(solu_left, solu_right);
+    return solution;
+}
+
+#+END_SRC
+
+#+BEGIN_SRC source
+
+a[n] = 1,3,5,7,9, 8,6,4,2,0
+
+                        1,3,5,7,9,8,6,4,2,0         n = 10
+                          /            \
+                       13579         86420       --- 切一刀 O(1)
+                        / \           /  \
+                     135  79       864   20      --- 切两刀 O(2)
+                     /\    /\      /\     /\
+                   13  5   7 9    86 4   2  0    --- 切3刀  O(4)
+                   /\  |   | |    /\  |  |  |
+                  1 3  5   7 9   8 6  4  2  0    --- 切8刀 => O(n/2)    total time = 1+2+4+8+...n/2 = O(n)    
+-----------------------------------------------------------------------
+                  13   5   79    68   4   02     --- O(n)     total time = n * log(n)行 = O(nlog(n))
+                   \   /   |     \    /   |
+                    135    79      468    02     --- O(n)
+                     \     /         \   /
+                      13579           02468
+                         \            /
+                         01 23 45 67 89
+
+
+#+END_SRC
+- 分析recursion的复杂度, 一定要把树画出来
+- 时间复杂度: 取大的, O(nlog(n))
+- 空间复杂度: 看纵深. 最左边一条路径所有元素总和: 1+2+3+5 = 10 => O(n)
+
+*** Merge sort面试题
+- 能否用merge sort来sort linked list.
+  - 可以的
+  - 为了切, 必须遍历每个元素, 所以时间复杂度每层O(n), 总共O(nlog(n)), 在横线上
+  - 横线下, 时间复杂度不变, 是O(nlog(n))
+  - 总结, 有细微变化, 总体还是O(nlog(n)), 但是其实比原版merge sort要慢一些些
+- 如果面试官给出用merge sort, 我要先把merge sort先复述一遍
+- merge sort能sort字符. ASCII, /ˈæski/ ASS-kee
+  - A1B2C3D4 -> ABCD1234
+  - 反过来
+
+*** Quick Sort
+- 过程:
+#+BEGIN_SRC source
+- 随机一个pivot支点
+1 9 8 5 3 
+
+pivot选5
+1 9 8 3 5
+
+两个挡板, i的前面(不包括i)小于5, j的后面(不包括j)大于5
+1 9 8 3 5   // i的位置比5小, 后移
+i     j
+
+1 9 8 3 5   // i的位置9比5大, 交换(9,3)
+  i   j
+
+1 3 8 9 5   // 
+  i   j
+
+1 3 8 9 5   // 9比5大, j向前
+  i j
+    
+1 3 8 9 5   // 3比5小, 向后.... 然后实现两面互相掠过
+  j i
+
+1 3 5 8 9   // 讲5插入ij之间
+  j   i
+#+END_SRC
+
+*** quick sort 面试题 
+- Worst case
+  - 最好时间复杂度是: O(nlog(n))
+  - pivot 选择了最左或者最右的元素
+  #+BEGIN_SRC 
+xxxxxxp1_
+xxxxxp2_
+n-1
+n-2
+...
+#+END_SRC
+  - 所以最差的时间复杂度是: O(n^2)
+- rainbow sort(abcccabbcbbacaa -> aaaaa bbbbb ccccc): 3个挡板, 4个区域, 同向+相向而行 
+  - 挡板思想
+  - video: 2:18~2:22
+*** extra
+- 时间复杂度
+- what are they good for 对...有益 , thorough /thero/ 全
+*** Selection Sort 代码
+#+BEGIN_SRC java
+public class SelectionSort {
+  public int[] SelectionSort(int[] array) {
+    if (array == null || array.length <= 1){
+      return array;
+    }
+    for (int i = 0; i < array.length -1; i++){
+      int min = i;
+      for (int j = i + 1; j < array.length; j++) {
+        if (array [j] < array[min]){
+          min = j;
+        }
+      }
+      swap(array, i, min);
+    }
+    return array;
+  }
+  public void swap(int[] array, int left, int right) {
+    int temp = array[left];
+    array[left] = array[right];
+    array[right] = temp;
+  }
+}
+#+END_SRC
+
+*** Merge Sort 代码
+#+BEGIN_SRC java
+public class Solution {
+    public int[] mergeSort(int[] array) {
+        if (array == null) {
+            return array;
+        }
+        int[] helper = new int[array.length];
+        mergeSort(array, helper, 0, array.length - 1);
+        return array;
+    }
+    
+    private void mergeSort(int[] array, int[] helper, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int mid = left + (right - left) / 2;
+        mergeSort(array, helper, left, mid);
+        mergeSort(array, helper, mid + 1, right);
+        merge(array, helper, left, mid, right);
+    }
+
+    private void merge(int[] array, int[] helper, int left, int mid, int right) {
+        for (int i = left; i <= right; i++){
+            helper[i] = array[i];
+        }
+        int leftIndex = left;
+        int rightIndex = mid + 1;
+        while (leftIndex <= mid && rightIndex <= right) {
+            if (helper[leftIndex] <= helper[rightIndex]) {
+                array[left++] = helper[leftIndex++];
+            }else{
+                array[left++] = helper[rightIndex++];
+            }
+        }
+        while (leftIndex <= mid) {
+            array[left++] = helper[leftIndex++];
+        }
+    }
+}
+#+END_SRC
+
+- run by hand
+#+BEGIN_SRC source
+
+#+END_SRC
+** 2/13 Class2 Recursion I & binary Search p10~p20
+*** Iterative反复的 way vs Recursive递归 way
+- Recursion
+  - 表面上，一个函数召唤自己
+  - 实质上，boild down a big problem to smaller ones 
+    将一个大问题煮成一个小问题（size n 基于 n-1或者...n-2....n/2)   
+  - why n/2
+- Example problem: Fibonacci sequence
+  - base case（递归中的终止方案里不再使用的产生的答案的情况）: F(0) = 0; F(1) = 1;
+  - recursive rule 递归规律：F(n) = F(n-1)+F(n-2);
+
+*** 计算Fibonacci的值
+#+BEGIN_SRC java
+int fibo(int n){
+    // base case
+    // 进入函数之后，睇下是否要停下来
+    if (n == 0){
+        return 0;
+    }else if (n == 1) {
+        return 1;
+    }
+    return fibo(n-1) + fibo(n-2);
+}
+#+END_SRC
+
+- Total nodes in the recursion tree（最底层？） = 2^n]
+- 时间复杂度在每个节点是O(1)
+  - 总时间复杂度是 = O(2^n * 1) = O(2^n)
+- 空间复杂度 = O(n)
+- 贴士：所有前面的节点的个数的总和都没有最后一层的节点的个数多，因此我们分析这tree的时间复杂度往往只看最后一层node的个数
+
+*** Example Question: 如何计算a^b 
+#+BEGIN_SRC java
+public int pow(int a, int b){
+    if (b == 0){
+        return 1;
+    }
+    int half_result = pow(a, b/2);
+    if (b % 2 == 1){
+        return half_result * half_result * a;
+    }else{
+        return half_result * half_result;
+    }
+}
+#+END_SRC
+
+2^2 = 4
+
+a = 2 b = 1
+a = 2 b = 0
+half_result = 1 
+
+1 * 1 * 2 = 2
+
+- 时间复杂度: O(log(b)) // a?
+- 空间复杂度: O(log(b)) // a?
+
+*** Binary Search 二分法检索
+- What is binary search in the context of an array? 在数组里，二分法检索是什么？
+1. 数组必须是有序的。
+   - not necessarily the case 不一定是这种情况
+1. Problem to solve? 解决的问题？
+
+
+
+
+
+
+
+
+
+
+
+
+
+* BootCamp & Debug Class
+** 2-8   
+*** 编程习惯
+- class名大写
+- 变量名和函数名小写
+
+*** 类型转换
+- Implicit隐性转换
+- Explicit直述转换
+#+BEGIN_SRC java
+public class Test {
+	public static void main(String[] args) {
+		int x = 1;
+		double y = (double)x; // x变成double
+		System.out.println("x="+x+";y="+y); // 字符串能够+
+	}
+}
+// 输出: x=1;y=1.0
+#+END_SRC
+
+#+BEGIN_SRC java
+public class Test {
+	public static void main(String[] args) {
+		double x = 19;
+		int y = (int)x;
+		System.out.println("x="+x+" ;y="+y);
+	}
+}
+// print: x=19.0 ;y=19
+#+END_SRC
+
+** 2-10 五
+*** 最大公约数
+#+BEGIN_SRC java
+public class Test {
+	public static void main(String[] args) {
+		int a = 147, b = 105;
+		while (a!=b){
+			if (a>b){
+				a-=b;
+			}else{
+				b-=a;
+			}
+		}
+		System.out.println("GCD is " + a);
+	}
+}
+#+END_SRC
+
+*** Fibonacci 数列, 斐波那契数列
+#+BEGIN_SRC java
+// 1, 2, 3, 4, 5, 6, 7, 8,  9,  10
+// 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+
+// 输出是第10个数，那就是34
+public class Test {
+    public static void main(String[] args) {
+        int n = 10;
+        int a = 0, b = 1;
+        for (int i = 3; i <= n; i++){
+            int t = a + b;
+            a = b;
+            b = t;
+        }
+        System.out.println(b);
+
+		System.out.println(arr[5]); // get an element
+		System.out.println(arr.length); // size of the array
+		
+		// Define and initialize an array
+		int[] arr1 = {3, 5, 7};
+		System.out.prinlin
+    }
+}
+#+END_SRC
+
+*** calculate the max value of an array
+#+BEGIN_SRC java
+//calculate the maximum value of an array
+public class Test {
+	public static void main(String[] args) {
+		int [] arr = {2, 13, 5, 6, 7};
+		int max = Integer.MIN_VALUE; // 假装这是所有数最小的值
+		for (int i : arr){
+			max = max > i? max : i; //  if max>i, true: max = max false: max = i
+		}
+		System.out.println(max);
+		
+	}
+}
+#+END_SRC
+
+*** inner product of two vectors 
+#+BEGIN_SRC java
+public class Test {
+	public static void main(String[] args) {
+		int [] a = {2, -1, 5, 6, 7};
+		int [] b = {-3, 0, 0, 4, 6};
+		if (a.length != b.length){
+			System.out.println("Cannot calculate inner product of two vectors of different lengths.");
+		}else{
+			int innerProduct = 0;
+			int n = a.length;
+			for (int i = 0; i <n ; i++){
+				innerProduct += (a[i] * b[i]);
+			}
+			System.out.println(innerProduct);
+		}
+		
+	}
+}
+#+END_SRC
+
+#+BEGIN_SRC java
+//L2-norm of the vector, 数组每个元素平方然和加在一起，然后开根
+public class Test {
+	public static void main(String[] args) {
+		int[] a = {2, -1, 5, 6, 7};
+		double l2Norm = 0.0;
+		for (int i : a){
+			l2Norm += i*i;
+		}
+		l2Norm = Math.sqrt(l2Norm);
+		System.out.println(l2Norm);
+		
+	}
+}
+
+#+END_SRC
+* Java Class
