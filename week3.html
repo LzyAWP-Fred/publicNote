@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-02-19 Sun 05:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Ava1oN" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org208d794">1. TITLE Week 03</a>
+<ul>
+<li><a href="#orgd3fae04">1.1. SQL - Data Type</a>
+<ul>
+<li><a href="#org187ddbe">1.1.1. 前言</a></li>
+<li><a href="#org15e1193">1.1.2. NULL</a></li>
+<li><a href="#org5a8f6b0">1.1.3. INTEGER</a></li>
+<li><a href="#org34f417a">1.1.4. REAL</a></li>
+<li><a href="#org08906dd">1.1.5. TEXT</a></li>
+<li><a href="#orgde1174b">1.1.6. Date and Time</a></li>
+<li><a href="#org61380c5">1.1.7. BLOB</a></li>
+<li><a href="#org8e6c6ae">1.1.8. NUMERIC</a></li>
+<li><a href="#org3ac124e">1.1.9. Non SQLITE DATA TYPES</a></li>
+</ul>
+</li>
+<li><a href="#orgabe181b">1.2. Sql - Python and Database</a>
+<ul>
+<li><a href="#org9ffb77e">1.2.1. How to 描绘represent a database in python</a></li>
+<li><a href="#orgc69b6af">1.2.2. Sqlite to python</a></li>
+<li><a href="#orgddd09a4">1.2.3. Type Checking</a></li>
+<li><a href="#org2fc483c">1.2.4. rows横排</a></li>
+<li><a href="#org77a07fe">1.2.5. Table</a></li>
+<li><a href="#org2a692d3">1.2.6. Database</a></li>
+<li><a href="#org66e4ce5">1.2.7. Project API</a></li>
+<li><a href="#org2b9a60f">1.2.8. execute</a></li>
+<li><a href="#org0487eab">1.2.9. Tokens记号</a></li>
+<li><a href="#org552a69e">1.2.10. Text</a></li>
+<li><a href="#org28b9da7">1.2.11. Store database</a></li>
+</ul>
+</li>
+<li><a href="#org13de976">1.3. 时间</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org208d794" class="outline-2">
+<h2 id="org208d794"><span class="section-number-2">1</span> TITLE Week 03</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgd3fae04" class="outline-3">
+<h3 id="orgd3fae04"><span class="section-number-3">1.1</span> SQL - Data Type</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-org187ddbe" class="outline-4">
+<h4 id="org187ddbe"><span class="section-number-4">1.1.1</span> 前言</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>因为一个内部优化，没带有小数部分的浮点值和并存储在纵列有着真实的类(affinity)被写入硬盘以整数的形式，为了花更小的空间并且在读取的时候自动地转换回浮点数。这个优化是完全不可见的。只有通过检查数据文件raw bit（未经修改的字节）才能看出来。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org15e1193" class="outline-4">
+<h4 id="org15e1193"><span class="section-number-4">1.1.2</span> NULL</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li>NULL是一个合法的值在任何的纵列。NULL是在任何数据类的领域之外的。</li>
+<li>NULL通常代表了信息的缺乏或者不适用值</li>
+<li>不建议使用null
+<ol class="org-ol">
+<li>nothing</li>
+<li>false</li>
+<li>0</li>
+</ol></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql">CREATE TABLE biaoge (name TEXT, number INTEGER);
+INSERT INTO biaoge ('Ziyan Long', NULL);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a8f6b0" class="outline-4">
+<h4 id="org5a8f6b0"><span class="section-number-4">1.1.3</span> INTEGER</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>有符INT有最多8bytes长（64bits) 1bytes = 8bits</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org34f417a" class="outline-4">
+<h4 id="org34f417a"><span class="section-number-4">1.1.4</span> REAL</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<ul class="org-ul">
+<li>能够以小数(decimal)或者指数表示法表示</li>
+<li>ex: 1.5 or 5.6E12.4</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org08906dd" class="outline-4">
+<h4 id="org08906dd"><span class="section-number-4">1.1.5</span> TEXT</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<ul class="org-ul">
+<li>字符要用单引号</li>
+<li>exmaple: 'I''m a string'</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgde1174b" class="outline-4">
+<h4 id="orgde1174b"><span class="section-number-4">1.1.6</span> Date and Time</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<ul class="org-ul">
+<li>文本: '年-月-日 小时:分钟:秒'</li>
+<li>INTEGER 以unix时间</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org61380c5" class="outline-4">
+<h4 id="org61380c5"><span class="section-number-4">1.1.7</span> BLOB</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<ul class="org-ul">
+<li>被用于存储任意二进制数据（通常有：图片，视频，或者其他非文字数据）</li>
+<li>没有储存限制</li>
+<li>很少用到在INSERT语句,更多用在变成语言api的parameterized(参数的)查询(query).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e6c6ae" class="outline-4">
+<h4 id="org8e6c6ae"><span class="section-number-4">1.1.8</span> NUMERIC</h4>
+<div class="outline-text-4" id="text-1-1-8">
+<ul class="org-ul">
+<li>sqlite有另外一个类 NUMERIC</li>
+<li>一个纵列能有NUMERIC类可以包含值去使用全部5种存储类.当文本数据被插入到NUMERIC纵列的时候,那个储存类属于文本会被转换成INT或者REAL.</li>
+<li>如果前15个小数位被保留,那么TEXT和REAL之间的转换是无损的和可逆的.</li>
+<li>如果text的无损转换不可能,那么值将会存成text,不尝试去转换.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3ac124e" class="outline-4">
+<h4 id="org3ac124e"><span class="section-number-4">1.1.9</span> Non SQLITE DATA TYPES</h4>
+<div class="outline-text-4" id="text-1-1-9">
+<ul class="org-ul">
+<li>Memo 能存有超多字符</li>
+<li>Enum 受限字符串</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabe181b" class="outline-3">
+<h3 id="orgabe181b"><span class="section-number-3">1.2</span> Sql - Python and Database</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-org9ffb77e" class="outline-4">
+<h4 id="org9ffb77e"><span class="section-number-4">1.2.1</span> How to 描绘represent a database in python</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li>Project2要求
+<ul class="org-ul">
+<li>sqlite的输入和输出都需要一样风格</li>
+</ul></li>
+<li>剩下的需实现内容都是建议以一种方式实现</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc69b6af" class="outline-4">
+<h4 id="orgc69b6af"><span class="section-number-4">1.2.2</span> Sqlite to python</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li>类型等换:
+<ul class="org-ul">
+<li>NULL == None</li>
+<li>INTEGER == int</li>
+<li>REAL == float</li>
+<li>fTEXT == str</li>
+<li>BLOB == bytes</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgddd09a4" class="outline-4">
+<h4 id="orgddd09a4"><span class="section-number-4">1.2.3</span> Type Checking</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<ul class="org-ul">
+<li>如果一个纵列被公告去有个类,那么每个元素在那个纵列都必须一致(conform)或者被转换成xxx类</li>
+<li>sqlite不介意错误匹配的类发生, 爆炸自己负责</li>
+<li>example:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql">CREATE TABLE BIAO (name  text);
+INSERT INTO BIAO value(5);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2fc483c" class="outline-4">
+<h4 id="org2fc483c"><span class="section-number-4">1.2.4</span> rows横排</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<ul class="org-ul">
+<li>你可以描述一横排成一个table,table在python里面是tuple</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sql">INSERT INTO biao VALUES (1, 'I''m a string');
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python">table = (1, 'I''m a string')
+</pre>
+</div>
+<ul class="org-ul">
+<li>tuple一个值的时候,还是要留","号</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python">one_value = (10475030,)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org77a07fe" class="outline-4">
+<h4 id="org77a07fe"><span class="section-number-4">1.2.5</span> Table</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<ul class="org-ul">
+<li>一个table可以通过一个python类来描述(有两部分)
+<ul class="org-ul">
+<li>schema <i>skime</i> (有: 表的名字, 纵列的名字, 类型)</li>
+<li>row 横排</li>
+</ul></li>
+<li>横排不是必须唯一的, 并且横排的顺序是冇所谓的.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2a692d3" class="outline-4">
+<h4 id="org2a692d3"><span class="section-number-4">1.2.6</span> Database</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<ul class="org-ul">
+<li>database能有多个table</li>
+<li>需要table的名字来找到本体</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org66e4ce5" class="outline-4">
+<h4 id="org66e4ce5"><span class="section-number-4">1.2.7</span> Project API</h4>
+<div class="outline-text-4" id="text-1-2-7">
+<div class="org-src-container">
+<pre class="src src-python">import sqlite3
+conn = sqlite3.connect("fileName.db")  #connect 会搞一个对象去操作
+conn.execute("CREATE TABLE biao (name TEXT);")
+conn.execute("INSERT INTO biao VALUES('Ziyan');")
+rows = conn.execute("SELECT * FROM biao;") #rows竟然是一个对象! 但是能row in rows来把每一排抽取出来
+for row in rows:
+  print(row)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2b9a60f" class="outline-4">
+<h4 id="org2b9a60f"><span class="section-number-4">1.2.8</span> execute</h4>
+<div class="outline-text-4" id="text-1-2-8">
+<ul class="org-ul">
+<li>必须都是合法sql语句.
+<ul class="org-ul">
+<li>空格是可以的</li>
+<li>和其他
+<ul class="org-ul">
+<li>\n (newline)</li>
+<li>\s (space)</li>
+<li>\t (tab)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0487eab" class="outline-4">
+<h4 id="org0487eab"><span class="section-number-4">1.2.9</span> Tokens记号</h4>
+<div class="outline-text-4" id="text-1-2-9">
+<div class="org-src-container">
+<pre class="src src-sql">CREATE TABLE biao (name TEXT, age INTEGER);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org552a69e" class="outline-4">
+<h4 id="org552a69e"><span class="section-number-4">1.2.10</span> Text</h4>
+<div class="outline-text-4" id="text-1-2-10">
+<div class="org-src-container">
+<pre class="src src-python"># 字符串的单引号一定要跟住字符串, 而不是独立的item
+# 最后一项都是分号;
+rightList = ["INSERT", "INTO", "myTable", "VALUES", "(", "'My name'", ")", ";"]
+wrongList = ["INSERT", "INTO", "myTable", "VALUES", "(", "'", "My", "name", "'", ")", ";"]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org28b9da7" class="outline-4">
+<h4 id="org28b9da7"><span class="section-number-4">1.2.11</span> Store database</h4>
+<div class="outline-text-4" id="text-1-2-11">
+<ul class="org-ul">
+<li>I recommend <b>while</b>   we   are only making <b>transient</b> [ <i>'trænziәnt</i> ] database.</li>
+<li>我 建议     <b>到时候</b>  我们 只 会    搞     <b>瞬间变化的</b>             数据库</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org13de976" class="outline-3">
+<h3 id="org13de976"><span class="section-number-3">1.3</span> 时间</h3>
+<div class="outline-text-3" id="text-1-3">
+<ol class="org-ol">
+<li>Week03<sub>Python</sub><sub>Database</sub><sub>More.pptx</sub> 40min</li>
+<li>test 40min</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Ava1oN</p>
+<p class="date">Created: 2017-02-19 Sun 05:30</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

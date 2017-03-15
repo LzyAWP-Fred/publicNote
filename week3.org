@@ -1,0 +1,136 @@
+* TITLE Week 03
+** SQL - Data Type
+   
+*** 前言
+- 因为一个内部优化，没带有小数部分的浮点值和并存储在纵列有着真实的类(affinity)被写入硬盘以整数的形式，为了花更小的空间并且在读取的时候自动地转换回浮点数。这个优化是完全不可见的。只有通过检查数据文件raw bit（未经修改的字节）才能看出来。
+
+*** NULL
++ NULL是一个合法的值在任何的纵列。NULL是在任何数据类的领域之外的。
++ NULL通常代表了信息的缺乏或者不适用值
++ 不建议使用null
+  1. nothing
+  2. false
+  3. 0
+#+BEGIN_SRC sql
+CREATE TABLE biaoge (name TEXT, number INTEGER);
+INSERT INTO biaoge ('Ziyan Long', NULL);
+#+END_SRC
+
+*** INTEGER
++ 有符INT有最多8bytes长（64bits) 1bytes = 8bits
+
+*** REAL
++ 能够以小数(decimal)或者指数表示法表示
++ ex: 1.5 or 5.6E12.4
+
+*** TEXT
++ 字符要用单引号
++ exmaple: 'I''m a string'
+
+*** Date and Time
++ 文本: '年-月-日 小时:分钟:秒'
++ INTEGER 以unix时间
+
+*** BLOB
++ 被用于存储任意二进制数据（通常有：图片，视频，或者其他非文字数据）
++ 没有储存限制
++ 很少用到在INSERT语句,更多用在变成语言api的parameterized(参数的)查询(query).
+
+*** NUMERIC
++ sqlite有另外一个类 NUMERIC
++ 一个纵列能有NUMERIC类可以包含值去使用全部5种存储类.当文本数据被插入到NUMERIC纵列的时候,那个储存类属于文本会被转换成INT或者REAL.
++ 如果前15个小数位被保留,那么TEXT和REAL之间的转换是无损的和可逆的.
++ 如果text的无损转换不可能,那么值将会存成text,不尝试去转换.
+
+*** Non SQLITE DATA TYPES
++ Memo 能存有超多字符
++ Enum 受限字符串
+
+** Sql - Python and Database
+
+*** How to 描绘represent a database in python
++ Project2要求
+  + sqlite的输入和输出都需要一样风格
++ 剩下的需实现内容都是建议以一种方式实现
+
+*** Sqlite to python
+- 类型等换:
+  - NULL == None
+  - INTEGER == int
+  - REAL == float
+  - fTEXT == str
+  - BLOB == bytes
+
+*** Type Checking
++ 如果一个纵列被公告去有个类,那么每个元素在那个纵列都必须一致(conform)或者被转换成xxx类
++ sqlite不介意错误匹配的类发生, 爆炸自己负责
++ example:
+#+BEGIN_SRC sql
+CREATE TABLE BIAO (name  text);
+INSERT INTO BIAO value(5);
+#+END_SRC
+
+*** rows横排
+- 你可以描述一横排成一个table,table在python里面是tuple
+#+BEGIN_SRC sql
+INSERT INTO biao VALUES (1, 'I''m a string');
+#+END_SRC  
+#+BEGIN_SRC python
+table = (1, 'I''m a string')
+#+END_SRC
+- tuple一个值的时候,还是要留","号
+#+BEGIN_SRC python
+one_value = (10475030,)
+#+END_SRC
+
+*** Table
+- 一个table可以通过一个python类来描述(有两部分)
+  - schema /skime/ (有: 表的名字, 纵列的名字, 类型)
+  - row 横排
+- 横排不是必须唯一的, 并且横排的顺序是冇所谓的.
+
+*** Database
+- database能有多个table
+- 需要table的名字来找到本体
+
+*** Project API
+#+BEGIN_SRC python
+import sqlite3
+conn = sqlite3.connect("fileName.db")  #connect 会搞一个对象去操作
+conn.execute("CREATE TABLE biao (name TEXT);")
+conn.execute("INSERT INTO biao VALUES('Ziyan');")
+rows = conn.execute("SELECT * FROM biao;") #rows竟然是一个对象! 但是能row in rows来把每一排抽取出来
+for row in rows:
+  print(row)
+#+END_SRC
+
+*** execute
+- 必须都是合法sql语句.
+  - 空格是可以的
+  - 和其他
+    - \n (newline)
+    - \s (space)
+    - \t (tab)
+
+*** Tokens记号
+#+BEGIN_SRC sql
+CREATE TABLE biao (name TEXT, age INTEGER);
+#+END_SRC
+
+*** Text
+#+BEGIN_SRC python
+# 字符串的单引号一定要跟住字符串, 而不是独立的item
+# 最后一项都是分号;
+rightList = ["INSERT", "INTO", "myTable", "VALUES", "(", "'My name'", ")", ";"]
+wrongList = ["INSERT", "INTO", "myTable", "VALUES", "(", "'", "My", "name", "'", ")", ";"]
+#+END_SRC
+
+*** Store database
+- I recommend *while*   we   are only making *transient* [ /'trænziәnt/ ] database.
+- 我 建议     *到时候*  我们 只 会    搞     *瞬间变化的*             数据库
+
+** Continue
+
+** 时间
+1. Week03_Python_Database_More.pptx 40min
+1. test 40min
