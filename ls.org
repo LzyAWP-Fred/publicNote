@@ -1,0 +1,22 @@
+After every little UX/UI change, the first challenged thing is to pass the test cases about preferences.
+There are about 1000s test cases that we need to take care.
+The test cases can detect defects or bugs of our modification. 
+Most test cases about preferences simulates human behaviors on Firefox.
+
+Zack and I had some difficulties during the development.
+
+We re-arranges about:preferences, so the content changes. 
+However, the old test cases is based on the old about:preferences.
+For examples, it used to have a button there, but now there is no button.
+So we need to re-write these test caes. Sometimes failing 100s of test cases is normal thing.
+
+Another difficulty is that sometimes its hard to find out why we fail the test cases.
+Because test case simulation goes really fast, its hard to see what simulation doing.
+So, we can look at the code, but sometimes it looks fine at all.
+We need to break the test cases case by case and add code to slow it down to see what simulation doing. 
+Eventually, we found out that the button didn't show in the windows.
+We need to scroll down to see it.
+
+At the end, we also need to pass all other test cases for the whole firefox.
+
+Probe, Mozilla UI/UX team can utilize these datat to improve firefox in the future.
