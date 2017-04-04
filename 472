@@ -22,3 +22,5 @@ Compute a normal N for each vertex of the polygon.
 From bilinear interpolation compute a normal, Ni for each pixel. (This must be renormalized each time)
 From Ni compute an intensity Ii for each pixel of the polygon.
 Paint pixel to shade corresponding to Ii.
+
+http://www.cs.princeton.edu/courses/archive/spr03/cs426/lectures/10-scan.pdf
