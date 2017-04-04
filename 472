@@ -1,0 +1,24 @@
+Flat Shading------
+object is illuminated only by directional light sources and is either diffuse or viewed from infinitely far away
+
+Objects look like they are composed of polygons
+- OK for polyhedral objects
+- Not so good for smooth surfaces
+
+shade each polygon of an object based on the angle between the polygon's surface normal and
+the direction of the light source, their respective colors and the intensity of the light source.
+
+
+Gouraud Shading----
+Determine the normal at each polygon vertex
+Apply an illumination model to each vertex to calculate the vertex intensity
+Interpolate the vertex intensities using bilinear interpolation over the surface polygon
+One lighting calculation per vertex
+
+Phong shading------
+Phong shading is similar to Gouraud shading, except that the Normals are interpolated. Thus, the specular highlights are computed much more precisely than in the Gouraud shading model:
+
+Compute a normal N for each vertex of the polygon.
+From bilinear interpolation compute a normal, Ni for each pixel. (This must be renormalized each time)
+From Ni compute an intensity Ii for each pixel of the polygon.
+Paint pixel to shade corresponding to Ii.
